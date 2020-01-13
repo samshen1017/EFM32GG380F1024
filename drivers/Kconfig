@@ -1,0 +1,341 @@
+# =================== efm32 driver option ===================
+
+menu "EFM32 EBI Driver"
+ config RT_USING_EBI
+        bool "Enable EBI"
+        default n
+ config RT_USING_EXT_SRAM
+        bool "Enable extended SRAM"
+        default n
+ config RT_USING_EXT_MALLOC
+        bool "Enable extended rt_malloc with sram"
+        default n
+ menu "Override rt_malloc with extended sram"
+    depends on RT_USING_EXT_MALLOC
+    comment "please modify rtconfig.h that remove \" \" in #define"
+    config RT_KERNEL_MALLOC
+        string "Enable override rt_malloc"
+        default "ext_sram_alloc"
+    config RT_KERNEL_FREE
+        string "Enable override rt_free"
+        default "ext_sram_free"
+    config RT_KERNEL_REALLOC
+        string "Enable override rt_realloc"
+        default "ext_sram_realloc"
+ endmenu
+endmenu
+
+menu  "EFM32 Serial Driver"
+    depends on RT_USING_SERIAL
+#debug
+    config RT_SEIRAL_DEBUG
+        bool "Enable Serial debug"
+        default n
+
+#leuart0
+    config RT_USING_LEUART0
+        bool "Enable LEUART0"
+        default y
+    config LEUART0_LOCATION
+        hex "leuart0 location number"
+        default 0x0
+        depends on RT_USING_LEUART0
+    config RT_LEUART0_NAME
+        string "define leuart0 name"
+        default "leuart0"
+        depends on RT_USING_LEUART0
+
+#leuart1
+    config RT_USING_LEUART1
+        bool "Enable LEUART1"
+        default n
+    config LEUART1_LOCATION
+        hex "leuart1 location number"
+        default 0x0
+        depends on RT_USING_LEUART1
+    config RT_LEUART1_NAME
+        string "define leuart1 name"
+        default "leuart1"
+        depends on RT_USING_LEUART1
+
+#uart0
+    config RT_USING_UART0
+        bool "Enable UART0"
+        default n
+    config UART0_LOCATION
+        hex "uart0 location number"
+        default 0x0
+        depends on RT_USING_UART0
+    config RT_UART0_NAME
+        string "define uart0 name"
+        default "uart0"
+        depends on RT_USING_UART0
+
+#uart1
+    config RT_USING_UART1
+        bool "Enable UART1"
+        default n    
+    config UART1_LOCATION
+        hex "uart1 location number"
+        default 0x0
+        depends on RT_USING_UART1
+    config RT_UART1_NAME
+        string "define uart1 name"
+        default "uart1"
+        depends on RT_USING_UART1
+
+#usart0
+    config RT_USING_USART0
+        bool "Enable USART0"
+        default n
+    config USART0_LOCATION
+        hex "usart0 location number"
+        default 0x0
+        depends on RT_USING_USART0
+    config RT_USART0_NAME
+        string "define usart0 name"
+        default "usart0"
+        depends on RT_USING_USART0
+
+#usart1
+    config RT_USING_USART1
+        bool "Enable USART1"
+        default n
+    config USART1_LOCATION
+        hex "usart1 location number"
+        default 0x0
+        depends on RT_USING_USART1
+    config RT_USART1_NAME
+        string "define usart1 name"
+        default "usart1"
+        depends on RT_USING_USART1
+
+#usart2
+    config RT_USING_USART2
+        bool "Enable USART2"
+        default n
+    config USART2_LOCATION
+        hex "usart2 location number"
+        default 0x0
+        depends on RT_USING_USART2
+    config RT_USART2_NAME
+        string "define usart2 name"
+        default "usart2"
+        depends on RT_USING_USART2
+
+endmenu
+
+menu "EFM32 I2C Driver"
+    depends on RT_USING_I2C
+#debug
+    config RT_I2C_DEBUG
+        bool "Enable I2C debug"
+        default n
+
+#i2c0
+    config RT_USING_I2C0
+        bool "Enable I2C0"
+        default n
+    config I2C0_LOCATION
+        hex "i2c0 location number"
+        default 0x0
+        depends on RT_USING_I2C0
+    config RT_I2C0_NAME
+        string "define i2c0 name"
+        default "i2c0"
+        depends on RT_USING_I2C0
+
+#i2c1
+    config RT_USING_I2C1
+        bool "Enable I2C1"
+        default n
+    config I2C1_LOCATION
+        hex "i2c1 location number"
+        default 0x0
+        depends on RT_USING_I2C1
+    config RT_I2C1_NAME
+        string "define i2c1 name"
+        default "i2c1"
+        depends on RT_USING_I2C1
+endmenu
+
+menu  "EFM32 SPI Driver"
+    depends on RT_USING_SPI
+#debug
+    config RT_SPI_DEBUG
+        bool "Enable SPI debug"
+        default n
+
+#dma mode
+    config SPI_USING_DMA
+        bool "Enable SPI DMA mode"
+        default y
+
+#spi0
+    config RT_USING_SPI0
+        bool "Enable SPI0"
+        default n
+    config SPI0_LOCATION
+        hex "spi0 location number"
+        default 0x0
+        depends on RT_USING_SPI0
+    config RT_SPI0_NAME
+        string "define spi0 name"
+        default "spi0"
+        depends on RT_USING_SPI0
+
+#spi1
+    config RT_USING_SPI1
+        bool "Enable SPI1"
+        default n
+    config SPI1_LOCATION
+        hex "spi1 location number"
+        default 0x0
+        depends on RT_USING_SPI1
+    config RT_SPI1_NAME
+        string "define spi1 name"
+        default "spi1"
+        depends on RT_USING_SPI1
+
+#spi2
+    config RT_USING_SPI2
+        bool "Enable SPI2"
+        default n
+    config SPI2_LOCATION
+        hex "spi2 location number"
+        default 0x0
+        depends on RT_USING_SPI2
+    config RT_SPI2_NAME
+        string "define spi2 name"
+        default "spi2"
+        depends on RT_USING_SPI2
+
+endmenu
+
+menu "EFM32 WDT"
+        config RT_USING_WDT
+        bool "Enable WDT"
+        default n
+    config WDT_NAME
+        string "WDT name"
+        default "wdt0"
+        depends on RT_USING_WDT
+endmenu
+
+menu "EFM32 TIMER"
+        depends on RT_USING_HWTIMER
+#letimer
+    config RT_USING_LETIMER0
+        bool "Enable leTimer0"
+        default n
+    config RT_LETIMER0_NAME
+        string "leTimer0 name"
+        default "letimer0"
+        depends on RT_USING_LETIMER0
+#timer0
+    config RT_USING_TIMER0
+        bool "Enable Timer0"
+        default n
+    config TIMER0_NAME
+        string "Timer0 name"
+        default "timer0"
+        depends on RT_USING_TIMER0
+#timer1
+    config RT_USING_TIMER1
+        bool "Enable Timer1"
+        default n
+    config TIMER1_NAME
+        string "Timer1 name"
+        default "timer1"
+        depends on RT_USING_TIMER1
+#timer2
+    config RT_USING_TIMER2
+        bool "Enable Timer2"
+        default n
+    config TIMER2_NAME
+        string "Timer2 name"
+        default "timer2"
+        depends on RT_USING_TIMER2
+endmenu
+
+menu  "EFM32 W25QXX Device support"
+    depends on RT_USING_SPI
+    config RT_USING_W25QXX
+        bool "Enable W25QXX support"
+        default n
+
+    config W25QXX_USING_SPI_NAME
+        string "W25QXX using spi bus name"
+        default "spi0"
+        depends on RT_USING_W25QXX
+    
+    config W25QXX_DFS_AUTO_MOUNT
+        bool "w25qxx auto mount with DFS"
+        default n
+        depends on RT_USING_W25QXX
+endmenu
+
+menu "EFM32 LS027B7DH Device support"
+    depends on RT_USING_SPI
+    config RT_USING_LS027B7DH
+    bool "Enable LS027B7DH(SPI LCD) support, PKG_USING_GUIENGINE will be selected when enable it."
+    default n
+    select PKG_USING_GUIENGINE
+
+    config LS027B7DH_USING_SPI_NAME
+    string "LS027B7DH using spi bus name"
+    default "spi1"
+    depends on RT_USING_LS027B7DH
+endmenu
+
+menu "EFM32 ZSC31014 Device support"
+    depends on RT_USING_I2C0
+    config RT_USING_ZSC31014
+    bool "Enable ZSC31014 support"
+    default n
+
+    config ZSC31014_USING_I2C_NAME
+    string "ZSC31014 using i2c bus name"
+    default "i2c0"
+    depends on RT_USING_ZSC31014
+endmenu
+
+menu "EFM32 SI114X Device support"
+    depends on RT_USING_I2C
+    config RT_USING_SI114X
+    bool "Enable SI114X support"
+    default n
+
+    config SI114X_USING_I2C_NAME
+    string "SI114X using i2c bus name"
+    default "i2c0"
+    depends on RT_USING_SI114X
+endmenu
+
+menu "EFM32 BlueMod_SR Device support"
+    config RT_USING_BLUEMOD_SR
+    bool "Enable BlueMod_SR support"
+    default n
+    select RT_USING_AT
+    select AT_USING_CLIENT
+    config BLUEMOD_SR_USING_SERIAL_NAME
+    string "BlueMod_SR using serial port name"
+    default "usart2"
+    depends on RT_USING_BLUEMOD_SR
+endmenu
+
+menu "EFM32 RX8025 Device support"
+    config RT_USING_RTC
+    bool "Enable RX8025_RTC support"
+    default n
+    
+    config RX8025_RTC_NAME
+    string "RX8025_RTC name"
+    default "rtc"
+    depends on RT_USING_RTC
+
+    config RX8025_USING_I2C_NAME
+    string "RX8025 using i2c bus name"
+    default "i2c0"
+    depends on RT_USING_RTC
+endmenu

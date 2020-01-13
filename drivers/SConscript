@@ -1,0 +1,91 @@
+Import('RTT_ROOT')
+Import('rtconfig')
+from building import *
+
+cwd = GetCurrentDir()
+
+
+# add the general drivers.
+src = Split("""
+	board.c
+    hdl_interrupt.c
+    drv_dma.c
+""")
+#    dev_zsc31014.c
+
+#pm driver
+if GetDepend(['RT_USING_PM']):
+	src +=['emodes.c', 'drv_pm.c']
+	
+#ebi driver
+if GetDepend(['RT_USING_EBI']):
+    src +=['drv_ebi.c']
+
+#gpio driver
+if GetDepend(['RT_USING_PIN']):
+    src += ['drv_pin.c']
+
+#i2c bus driver
+if GetDepend(['RT_USING_I2C']):
+    src += ['drv_i2c.c', 'i2cspm.c']
+	
+#spi bus driver
+if GetDepend(['RT_USING_SPI']):
+	src += ['drv_spi.c']
+
+#wdt driver
+if GetDepend(['RT_USING_WDT']):
+    src += ['drv_wdt.c']
+
+#letimer driver
+if GetDepend(['RT_USING_LETIMER0']):
+    src += ['drv_letimer.c']
+
+#timer driver
+if (GetDepend(['RT_USING_TIMER0']) or GetDepend(['RT_USING_TIMER1']) or GetDepend(['RT_USING_TIMER2'])):
+    src += ['drv_timer.c']
+
+#leuart driver
+if (GetDepend(['RT_USING_LEUART0']) or GetDepend(['RT_USING_LEUART1'])):
+    src += ['drv_leuart.c']
+
+#usart driver
+if (GetDepend(['RT_USING_USART0']) or GetDepend(['RT_USING_USART1']) or GetDepend(['RT_USING_USART2']) or GetDepend(['RT_USING_UART0']) or GetDepend(['RT_USING_UART1'])):
+#if (GetDepend(['RT_USING_USART0']) or GetDepend(['RT_USING_USART1']) or GetDepend(['RT_USING_USART2']) or GetDepend(['RT_USING_UART0']) or GetDepend(['RT_USING_UART1']) or GetDepend(['RT_USING_LEUART0']) or GetDepend(['RT_USING_LEUART1'])):
+	src += ['drv_serial.c']
+
+#memory lcd device
+if GetDepend(['RT_USING_LS027B7DH']):
+    src += ['dev_ls027b7dh.c']
+
+#w25qxx device
+if GetDepend(['RT_USING_W25QXX']):
+    src += ['dev_w25qxx.c']
+
+#si114x device
+if GetDepend(['RT_USING_SI114X']):
+    src += ['dev_si114x.c']
+
+#BlueMod SR device
+if GetDepend(['RT_USING_BLUEMOD_SR']):
+    src += ['dev_bluemod_sr.c']
+
+#ZSC31014 device
+if GetDepend(['RT_USING_ZSC31014']):
+    src += ['dev_zsc31014.c']
+
+#RX8025 device
+if GetDepend(['RT_USING_RTC']):
+    src += ['dev_rx8025.c']
+#if GetDepend(['RT_USING_RTC']):
+#    src += ['drv_rtc.c']
+
+#SRAM device
+if GetDepend(['RT_USING_EXT_SRAM']):
+    src += ['dev_sram.c']
+
+CPPPATH = [cwd]
+
+group = DefineGroup('Drivers', src, depend = [''], CPPPATH = CPPPATH)
+
+Return('group')

@@ -1,0 +1,22 @@
+Import('RTT_ROOT')
+Import('rtconfig')
+from building import *
+
+cwd     = GetCurrentDir()
+
+# add the general drivers.
+src = Split("""
+   application.c
+   update.c
+   test.c
+   startup.c
+   delay.c
+   wdt.c
+   start_gcc.S
+""")
+
+CPPPATH = [cwd]
+
+group = DefineGroup('Applications', src, depend = [''], CPPPATH = CPPPATH)
+
+Return('group')

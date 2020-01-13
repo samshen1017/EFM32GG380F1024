@@ -1,0 +1,22 @@
+[
+ {
+  "path": "/packages/system/gui_engine", 
+  "ver": "latest", 
+  "name": "GUIENGINE"
+ }, 
+ {
+  "path": "/packages/system/fal", 
+  "ver": "latest", 
+  "name": "FAL"
+ }, 
+ {
+  "path": "/packages/system/LittlevGL2RTT", 
+  "ver": "latest", 
+  "name": "LITTLEVGL2RTT"
+ }, 
+ {
+  "path": "/packages/system/littlefs", 
+  "ver": "latest", 
+  "name": "LITTLEFS"
+ }
+]
